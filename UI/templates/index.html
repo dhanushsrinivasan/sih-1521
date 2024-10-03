@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Dashboard </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #8e44ad, #c0392b);
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            padding: 40px;
+            width: 200;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 60px;
+        }
+
+        form {
+            text-align: center;
+            margin: 10px auto;
+            width: 300px;
+            background-color: #e378c1;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0px;
+        }
+
+        select,
+        input[type="date"] {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        input[type="submit"] {
+            background-color: #76254b;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color:  #76254b;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+        }
+        
+        nav-list{
+            color: black;
+            background-color: #e378c1;
+
+}
+
+    </style>
+</head>
+<body>
+    
+    <h1>Weather Dashboard</h1>
+    <form method="POST">
+        <label for="day">Select Day:</label>
+        <input type="date" name="day" id="day" value="{{ selected_day }}" min="2022-01-01" max="2022-12-31">
+        <br>
+        <label for="city">Select City:</label>
+        <select name="city" id="city">
+            {% for city, coords in city_coordinates.items() %}
+                <option value="{{ city }}" {% if city == selected_city %}selected{% endif %}>{{ city }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+    <br>
+    <p>Selected Day: {{ selected_day }}</p>
+    <p>Selected City: {{ selected_city }}</p>
+    <p>Average Rainfall: {{ avg_rainfall }} mm</p>
+    
+    <!-- Embed the image -->
+    <img id="weatherImage" src="{{ image_url }}" alt="Weather Image">
+<br>
+<img src="{{ url_for('static', filename='images/2022_timelapse.gif') }}" alt="Animated GIF">
+<img src="{{ url_for('static', filename='images/powerbi.png') }}" alt="Your Image">
+<img src="{{ url_for('static', filename='images/code.png')}}" alt="Your Image">
+<img src="{{ url_for('static', filename='images/lime_output.png') }}" alt="Your Image">
+
+</body>
+</html>
